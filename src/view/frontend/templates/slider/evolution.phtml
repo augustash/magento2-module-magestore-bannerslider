@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Bannerslider
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/** @var \Magento\Framework\Escaper $escaper */
+$styleSlide= $block->getSlider()->getStyleSlide();
+$slider = $block->getSlider();
+?>
+<link rel="stylesheet" type="text/css" href="<?= $escaper->escapeUrl($block->getViewFileUrl('Magestore_Bannerslider::css/slider'.$styleSlide.'.css')) ?>">
+<link rel="stylesheet" type="text/css" href="<?= $escaper->escapeUrl($block->getViewFileUrl('Magestore_Bannerslider::css/custom.css')) ?>">
+<script type="text/javascript">
+    require(['jquery','magestore/evolutionslider'], function($) {
+        $(document).ready(function($) {
+            $(".magestore-bannerslider-evolution-slider-<?= /* @noEscapeVerified */ $slider->getId(); ?>").slideshow({
+                width: '<?= /* @noEscapeVerified */ $slider->getWidth() ?>',
+                height: '<?= /* @noEscapeVerified */ $slider->getHeight() ?>',
+                transition: '<?= /* @noEscapeVerified */ $slider->getData("animationB") ?>',
+                delay: <?= /* @noEscapeVerified */ $slider->getSliderSpeed() ?>,
+            });
+        });
+    });
+</script>
+<div class="magestore-bannerslider-standard" data-mage-init='{"magestore/impress": {"url": "<?= $this->getUrl("bannerslider/index/impress") ?>", "slider_id": "<?= $escaper->escapeHtmlAttr($slider->getId()) ?>"}}'>
+    <?php if ($block->isShowTitle() == 1): ?>
+        <div class="magestore-bannerslider-title" style="font: bold 12px/16px Arial, Helvetica, sans-serif;text-transform: uppercase;color: #e26703; margin: auto; width: <?= $escaper->escapeHtmlAttr($slider->getWidth()) ?>px;">
+            <strong>
+                <span><?= $escaper->escapeHtml($slider->getTitle()); ?></span>
+            </strong>
+        </div>
+    <?php endif; ?>
+    <div class="magestore-bannerslide-evolution-slider" style="margin: auto; margin-bottom: 40px">
+        <div class="magestore-bannerslider-evolution-slider-<?= $slider->getId(); ?>" style="margin:auto; width: <?= $slider->getWidth() ?>px; height: <?= $slider->getHeight() ?>px;">
+            <?php foreach ($block->getBannerCollection() as $banner): ?>
+                <div>
+                    <a href="<?= $escaper->escapeUrl($banner->getClickUrl()) ?>" target="<?= $escaper->escapeHtmlAttr($banner->getTargetValue()) ?>" style="display:block;" data-mage-init='{"magestore/clickbanner": {"url": "<?= $this->getUrl("bannerslider/index/click") ?>", "slider_id": "<?= $escaper->escapeHtmlAttr($banner->getSliderId()) ?>", "banner_id": "<?= $escaper->escapeHtmlAttr($banner->getId()) ?>" }}' >
+                        <img style="width: <?= $escaper->escapeHtmlAttr($slider->getWidth()) ?>px; height: <?= $escaper->escapeHtmlAttr($slider->getHeight()) ?>px;" alt="<?= $escaper->escapeHtmlAttr($banner->getImageAlt()) ?>"  src="<?= $escaper->escapeUrl($block->getBannerImageUrl($banner)) ?>"/>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

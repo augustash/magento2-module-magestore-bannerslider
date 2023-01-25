@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Bannerslider
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/** @var \Magento\Framework\Escaper $escaper */
+$styleSlide = $block->getSlider()->getStyleSlide();
+$slider = $block->getSlider();
+$banner = $block->getFirstBannerItem();
+?>
+<div id="magestore-bannerslider-popup-<?= $escaper->escapeHtmlAttr($slider->getId()) ?>" class="magestore-bannerslider-popup" data-mage-init='{"magestore/impress": {"url": "<?= $this->getUrl("bannerslider/index/impress") ?>", "slider_id": "<?= $escaper->escapeHtmlAttr($block->getSlider()->getId()) ?>"}}'>
+    <div id="magestore-bannerslider-popup-close-<?= $escaper->escapeHtmlAttr($slider->getId()) ?>" title="Close"></div>
+    <?php if ($slider->getShowTitle() == 1): ?>
+        <p style="text-transform: uppercase; color: #e26703; margin-bottom: 0px; background-color: rgb(255, 255, 255);">
+            <strong>
+                <span><?= $escaper->escapeHtml($slider->getTitle()) ?></span>
+            </strong>
+        </p>
+    <?php endif; ?>
+    <?php if ($banner->getId()): ?>
+        <a href="<?= $escaper->escapeUrl($banner->getClickUrl()) ?>" target="<?= $escaper->escapeHtmlAttr($banner->getTargetValue()) ?>" style="display:block;" data-mage-init='{"magestore/clickbanner": {"url": "<?= $this->getUrl("bannerslider/index/click") ?>", "slider_id": "<?= $escaper->escapeHtmlAttr($banner->getSliderId()) ?>", "banner_id": "<?= $escaper->escapeHtmlAttr($banner->getId()) ?>" }}'>
+            <img style="width:<?= $escaper->escapeHtmlAttr($slider->getWidth()) ?>px; height: <?= $escaper->escapeHtmlAttr($slider->getHeight()) ?>px;" alt="<?= $escaper->escapeHtmlAttr($banner->getImageAlt()) ?>" src="<?= $escaper->escapeUrl($block->getBannerImageUrl($banner)) ?>" />
+        </a>
+    <?php endif; ?>
+</div>
+<script type="text/javascript">
+    require(['jquery', 'magestore/popup'], function($) {
+        $(document).ready(function() {
+            var left = ($(window).width() - <?= /* @noEscapeVerified */ $slider->getWidth() ?>) / 2;
+            var top = ($(window).height() - <?= /* @noEscapeVerified */ $slider->getHeight() ?>) / 2;
+            $('#magestore-bannerslider-popup-<?= /* @noEscapeVerified */ $slider->getId() ?>').bPopup({
+                position: [left, top]
+            });
+        });
+    });
+</script>

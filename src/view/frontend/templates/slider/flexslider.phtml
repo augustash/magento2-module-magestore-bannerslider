@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Bannerslider
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+use Magestore\Bannerslider\Model\Slider;
+
+/** @var \Magestore\Bannerslider\Block\SliderItem $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$styleSlide = $block->getSlider()->getStyleSlide();
+$slider = $block->getSlider();
+$htmlId   = $block->getFlexsliderHtmlId();
+$bannerCollection = $block->getBannerCollection();
+?>
+<link rel="stylesheet" type="text/css" href="<?= $escaper->escapeUrl($block->getViewFileUrl('Magestore_Bannerslider::css/flexslider.css')) ?>">
+<link rel="stylesheet" type="text/css" href="<?= $escaper->escapeUrl($block->getViewFileUrl('Magestore_Bannerslider::css/custom.css')) ?>">
+<script type="text/javascript">
+(function  () {
+    var flexSliderSelector = '<?= $htmlId; ?>';
+    require(['jquery', 'magestore/flexslider'], function($) {
+        var fitImageSlider = function (slider) {
+            if(slider && slider[0]) {
+                var height = $(slider[0]).find('.slides li img').height();
+                $(slider[0]).find('.slides li img').each(function(index, element){
+                    if($(element).height() > height) {
+                        height = $(element).height();
+                    }
+                });
+                $(slider[0]).find('.slides li,.slides  li a,.slides li img').css('height', height + 'px');
+            }
+        }
+        $(document).ready(function($) {
+            var STYLESLIDE_FLEXSLIDER_ONE = <?= /* @escapeNotVerified */ Slider::STYLESLIDE_FLEXSLIDER_ONE ?>;
+            var STYLESLIDE_FLEXSLIDER_TWO = <?= /* @escapeNotVerified */ Slider::STYLESLIDE_FLEXSLIDER_TWO ?>;
+            var STYLESLIDE_FLEXSLIDER_THREE = <?= /* @escapeNotVerified */ Slider::STYLESLIDE_FLEXSLIDER_THREE ?>;
+
+            switch (<?= $styleSlide ?>) {
+                case STYLESLIDE_FLEXSLIDER_ONE:
+                    $('.' + flexSliderSelector).flexslider({
+                        animation: '<?= $escaper->escapeHtml($slider->getData("animationB")); ?>',
+                        slideshowSpeed: <?= /* @escapeNotVerified */ $slider->getSliderSpeed() ?>,
+                        start: function (slider) {
+                            fitImageSlider(slider);
+                        }
+                    });
+                    break;
+                case STYLESLIDE_FLEXSLIDER_TWO:
+                    $('.' + flexSliderSelector).flexslider({
+                        animation: '<?= $escaper->escapeHtml($slider->getData("animationB")) ?>',
+                        controlNav: 'thumbnails',
+                        slideshowSpeed: <?= /* @escapeNotVerified */ $slider->getSliderSpeed() ?>,
+                        start: function (slider) {
+                            fitImageSlider(slider);
+                        }
+                    });
+                    break;
+                case STYLESLIDE_FLEXSLIDER_THREE:
+                    $('#'+flexSliderSelector + '-carousel').flexslider({
+                        animation: 'slide',
+                        controlNav: false,
+                        animationLoop: true,
+                        slideshow: true,
+                        itemWidth: 210,
+                        itemMargin: 5,
+                        asNavFor: '#' + flexSliderSelector,
+                        start: function (slider) {
+                            fitImageSlider(slider);
+                        }
+                    });
+                    $('#' + flexSliderSelector).flexslider({
+                        animation: '<?= $escaper->escapeHtml($slider->getData("animationB")) ?>',
+                        controlNav: false,
+                        animationLoop: true,
+                        slideshow: true,
+                        sync: '#'+flexSliderSelector + '-carousel',
+                        slideshowSpeed: <?= /* @escapeNotVerified */ $slider->getSliderSpeed() ?>,
+                        start: function (slider) {
+                            fitImageSlider(slider);
+                        }
+                    });
+                    break;
+                default:
+                    $('.' + flexSliderSelector).flexslider({
+                        animation: 'slide',
+                        animationLoop: true,
+                        itemWidth: 400,
+                        slideshow: true,
+                        itemMargin: 5,
+                        minItems: 2,
+                        maxItems: 4,
+                        start: function (slider) {
+                            fitImageSlider(slider);
+                        }
+                    });
+                    break;
+            }
+
+        });
+    });
+})();
+</script>
+<div class="magestore-bannerslider-standard" data-mage-init='{"magestore/impress": {"url": "<?= $this->getUrl("bannerslider/index/impress") ?>", "slider_id": "<?= $block->getSlider()->getId() ?>"}}'>
+    <?php if ($block->isShowTitle() == Slider::SHOW_TITLE_YES): ?>
+        <div class="magestore-bannerslider-title" style="font: bold 12px/16px Arial, Helvetica, sans-serif;text-transform: uppercase;color: #e26703;">
+            <strong>
+                <span><?= $escaper->escapeHtml($slider->getTitle()); ?></span>
+            </strong>
+        </div>
+    <?php endif; ?>
+    <div class="magestore-bannerslide-flex-slider" style="margin: auto; margin-bottom: 40px;">
+        <div id="<?= $escaper->escapeHtmlAttr($htmlId) ?>" class="flexslider flexslider-content-image <?= $escaper->escapeHtmlAttr($htmlId) ?>" style="margin:auto">
+            <ul class="slides">
+                <?php foreach ($bannerCollection as $banner): ?>
+                    <?php if ($styleSlide == Slider::STYLESLIDE_FLEXSLIDER_TWO): ?>
+                        <li data-thumb="<?= $escaper->escapeUrl($block->getBannerImageUrl($banner)) ?>">
+                            <a href="<?= $escaper->escapeUrl($banner->getClickUrl()) ?>" target="<?= $escaper->escapeHtmlAttr($banner->getTargetValue()) ?>" style="display:block;" data-mage-init='{"magestore/clickbanner": {"url": "<?= $this->getUrl("bannerslider/index/click") ?>", "slider_id": "<?= $escaper->escapeHtmlAttr($banner->getSliderId()) ?>", "banner_id": "<?= $escaper->escapeHtmlAttr($banner->getId()) ?>" }}' >
+                                <img alt="<?= $escaper->escapeHtmlAttr($banner->getImageAlt()) ?>" src="<?= $escaper->escapeHtmlAttr($block->getBannerImageUrl($banner)) ?>"/>
+                            </a>
+                            <?php if($banner->getCaption()): ?>
+                                <div class="flex-caption"><?= $escaper->escapeHtml($banner->getCaption()); ?></div>
+                            <?php endif; ?>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="<?= $escaper->escapeUrl($banner->getClickUrl()) ?>" target="<?= $escaper->escapeHtmlAttr($banner->getTargetValue()) ?>" style="display:block;" data-mage-init='{"magestore/clickbanner": {"url": "<?= $this->getUrl("bannerslider/index/click") ?>", "slider_id": "<?= $escaper->escapeHtmlAttr($banner->getSliderId()) ?>", "banner_id": "<?= $escaper->escapeHtmlAttr($banner->getId()) ?>" }}' >
+                                <img alt="<?= $banner->getImageAlt() ?>"  src="<?= $block->getBannerImageUrl($banner) ?>"/>
+                            </a>
+                            <?php if($banner->getCaption()): ?>
+                                <div class="flex-caption"><?= $escaper->escapeHtml($banner->getCaption()); ?></div>
+                            <?php endif; ?>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <?php if ($styleSlide ==  Slider::STYLESLIDE_FLEXSLIDER_THREE): ?>
+            <!-- for flex slide carousel-->
+            <div id="<?= $escaper->escapeHtmlAttr($htmlId) ?>-carousel" class="flexslider flexslider-carousel" style="margin:auto">
+                <ul class="slides">
+                    <?php foreach ($bannerCollection as $banner):?>
+                        <li>
+                            <img  alt="<?= $escaper->escapeHtmlAttr($banner->getImageAlt()) ?>" src="<?= $escaper->escapeUrl($block->getBannerImageUrl($banner)) ?>" />
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<style>
+    .flex-viewport .slides li {
+        margin-bottom: 0px !important;
+    }
+</style>

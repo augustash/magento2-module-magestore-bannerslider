@@ -1,29 +1,33 @@
 {
-  "name": "magestore/bannerslider-magento2",
-  "description": "N/A",
-  "require": {
-    "php": "~8.0.0|~8.1.0"
-  },
-  "type": "magento2-module",
-  "version": "3.0.0",
+  "name": "augustash/module-magestore-bannerslider",
+  "description": "Forked version of outdated/abandoned Magestore module. Originally forked from https://github.com/xcom-magento/Bannerslider-Magento2 and cleaned up from there for PHP 8.1+ & Magento 2.4.5+ compatibility.",
   "license": [
     "OSL-3.0",
     "AFL-3.0"
   ],
-  "authors": [
-    {
-      "name": "Blanka",
-      "email": "blanka@magestore.com",
-      "homepage": "https://www.magestore.com/",
-      "role": "Developer"
-    }
-  ],
+  "type": "magento2-module",
+  "version": "3.1.0",
+  "require": {
+    "php": ">=8.1.0",
+    "magento/framework": ">=103.0",
+    "magento/module-backend": "@stable",
+    "magento/module-store": "@stable",
+    "magento/module-catalog": "@stable",
+    "magento/module-cms": "@stable",
+    "magento/module-config": "@stable",
+    "magento/module-media-storage": "@stable",
+    "magento/module-widget": "@stable",
+    "magento/module-ui": "@stable"
+  },
   "autoload": {
-    "files": [
-      "registration.php"
-    ],
     "psr-4": {
-      "Magestore\\Bannerslider\\": ""
-    }
+      "Magestore\\Bannerslider\\": "src/"
+    },
+    "files": [
+      "src/registration.php"
+    ]
+  },
+  "config": {
+    "sort-packages": true
   }
 }
