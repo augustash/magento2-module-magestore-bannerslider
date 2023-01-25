@@ -252,7 +252,10 @@ class SliderItem extends Template
     public function getBannerCollection()
     {
         $sliderId = $this->slider->getId();
-        return $this->bannerCollectionFactory->getBannerCollection($sliderId);
+
+        /** @var \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection $bannerCollection */
+        $bannerCollection = $this->bannerCollectionFactory->create();
+        return $bannerCollection->getBannerCollection($sliderId);
     }
 
     /**
