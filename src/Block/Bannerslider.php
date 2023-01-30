@@ -86,7 +86,7 @@ class Bannerslider extends Template
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _toHtml()
     {

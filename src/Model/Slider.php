@@ -37,66 +37,66 @@ use Magestore\Bannerslider\Model\ResourceModel\Slider\Collection as SliderCollec
  */
 class Slider extends \Magento\Framework\Model\AbstractModel
 {
-    const XML_CONFIG_BANNERSLIDER = 'bannerslider/general/enable_frontend';
+    public const XML_CONFIG_BANNERSLIDER = 'bannerslider/general/enable_frontend';
 
     /**
      * Allow to show title or not.
      */
-    const SHOW_TITLE_YES = 1;
-    const SHOW_TITLE_NO = 2;
+    public const SHOW_TITLE_YES = 1;
+    public const SHOW_TITLE_NO = 2;
 
     /**
      * style custom content.
      */
-    const STYLE_CONTENT_YES = 1;
-    const STYLE_CONTENT_NO = 2;
+    public const STYLE_CONTENT_YES = 1;
+    public const STYLE_CONTENT_NO = 2;
 
     /**
      * sort type of banners in a slider.
      */
-    const SORT_TYPE_RANDOM = 1;
-    const SORT_TYPE_ORDERLY = 2;
+    public const SORT_TYPE_RANDOM = 1;
+    public const SORT_TYPE_ORDERLY = 2;
 
     /**
      * Evolution slider.
      */
-    const STYLESLIDE_EVOLUTION_ONE = 1;
-    const STYLESLIDE_EVOLUTION_TWO = 2;
-    const STYLESLIDE_EVOLUTION_THREE = 3;
-    const STYLESLIDE_EVOLUTION_FOUR = 4;
+    public const STYLESLIDE_EVOLUTION_ONE = 1;
+    public const STYLESLIDE_EVOLUTION_TWO = 2;
+    public const STYLESLIDE_EVOLUTION_THREE = 3;
+    public const STYLESLIDE_EVOLUTION_FOUR = 4;
 
     /**
      * popup.
      */
-    const STYLESLIDE_POPUP = 5;
+    public const STYLESLIDE_POPUP = 5;
 
     /**
      * note slider.
      */
-    const STYLESLIDE_SPECIAL_NOTE = 6;
+    public const STYLESLIDE_SPECIAL_NOTE = 6;
 
     /**
      * flexslider.
      */
-    const STYLESLIDE_FLEXSLIDER_ONE = 7;
-    const STYLESLIDE_FLEXSLIDER_TWO = 8;
-    const STYLESLIDE_FLEXSLIDER_THREE = 9;
-    const STYLESLIDE_FLEXSLIDER_FOUR = 10;
+    public const STYLESLIDE_FLEXSLIDER_ONE = 7;
+    public const STYLESLIDE_FLEXSLIDER_TWO = 8;
+    public const STYLESLIDE_FLEXSLIDER_THREE = 9;
+    public const STYLESLIDE_FLEXSLIDER_FOUR = 10;
 
     /**
      * position code of note slider.
      */
-    const NOTE_POSITION_TOP_LEFT = 'top-left';
-    const NOTE_POSITION_MIDDLE_TOP = 'middle-top';
-    const NOTE_POSITION_TOP_RIGHT = 'top-right';
-    const NOTE_POSITION_MIDDLE_LEFT = 'middle-left';
-    const NOTE_POSITION_MIDDLE_RIGHT = 'middle-right';
-    const NOTE_POSITION_BOTTOM_LEFT = 'bottom-left';
-    const NOTE_POSITION_MIDDLE_BOTTOM = 'middle-bottom';
-    const NOTE_POSITION_BOTTOM_RIGHT = 'bottom-right';
+    public const NOTE_POSITION_TOP_LEFT = 'top-left';
+    public const NOTE_POSITION_MIDDLE_TOP = 'middle-top';
+    public const NOTE_POSITION_TOP_RIGHT = 'top-right';
+    public const NOTE_POSITION_MIDDLE_LEFT = 'middle-left';
+    public const NOTE_POSITION_MIDDLE_RIGHT = 'middle-right';
+    public const NOTE_POSITION_BOTTOM_LEFT = 'bottom-left';
+    public const NOTE_POSITION_MIDDLE_BOTTOM = 'middle-bottom';
+    public const NOTE_POSITION_BOTTOM_RIGHT = 'bottom-right';
 
     /**
-     * banner collection factory.
+     * Banner collection factory.
      *
      * @var \Magestore\Bannerslider\Model\ResourceModel\Banner\CollectionFactory
      */

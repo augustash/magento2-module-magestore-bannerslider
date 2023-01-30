@@ -33,7 +33,7 @@ use Magestore\Bannerslider\Controller\Adminhtml\AbstractAction as ParentClass;
  */
 abstract class Slider extends ParentClass
 {
-    const PARAM_CRUD_ID = 'slider_id';
+    public const PARAM_CRUD_ID = 'slider_id';
 
     /**
      * Check if admin has permissions to visit related pages.

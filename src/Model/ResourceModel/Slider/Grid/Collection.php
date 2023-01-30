@@ -1,8 +1,23 @@
 <?php
 
 /**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_BannerSlider
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
  */
 
 namespace Magestore\Bannerslider\Model\ResourceModel\Slider\Grid;
@@ -20,10 +35,6 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class Collection
- * Collection for displaying grid of sales documents
- */
 class Collection extends SliderCollection implements SearchResultInterface
 {
     /**
@@ -84,6 +95,8 @@ class Collection extends SliderCollection implements SearchResultInterface
     }
 
     /**
+     * Get aggregations.
+     * 
      * @return \Magento\Framework\Search\AggregationInterface[]
      */
     public function getAggregations()
@@ -92,6 +105,8 @@ class Collection extends SliderCollection implements SearchResultInterface
     }
 
     /**
+     * Set aggregrations.
+     *
      * @param \Magento\Framework\Search\AggregationInterface[] $aggregations
      * @return $this
      */

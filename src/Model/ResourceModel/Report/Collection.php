@@ -34,17 +34,10 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 use Psr\Log\LoggerInterface;
 
-/**
- * Report Collection
- * @category Magestore
- * @package  Magestore_Bannerslider
- * @module   Bannerslider
- * @author   Magestore Developer
- */
 class Collection extends AbstractCollection
 {
-    const REPORT_TYPE_ALL_SLIDER = '1';
-    const REPORT_TYPE_PER_SLIDER = '2';
+    public const REPORT_TYPE_ALL_SLIDER = '1';
+    public const REPORT_TYPE_PER_SLIDER = '2';
 
     protected $_idFieldName = 'report_id';
 
@@ -77,6 +70,7 @@ class Collection extends AbstractCollection
 
     /**
      * _contruct
+     *
      * @return void
      */
     protected function _construct()
@@ -86,9 +80,9 @@ class Collection extends AbstractCollection
 
     /**
      * Class constructor.
-     * 
+     *
      * Initialize class dependencies.
-     * 
+     *
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\Stdlib\DateTime\Timezone $stdTimezone
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
@@ -111,7 +105,14 @@ class Collection extends AbstractCollection
         $this->_storeManager = $storeManager;
         $this->_stdTimezone = $stdTimezone;
 
-        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
+        parent::__construct(
+            $entityFactory,
+            $logger,
+            $fetchStrategy,
+            $eventManager,
+            $connection,
+            $resource
+        );
     }
 
     /**

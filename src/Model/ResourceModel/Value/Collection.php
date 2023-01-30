@@ -26,17 +26,10 @@ use Magestore\Bannerslider\Model\Value as Model;
 use Magestore\Bannerslider\Model\ResourceModel\Value as ResourceModel;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
-/**
- * Value Collection
- * @category Magestore
- * @package  Magestore_Bannerslider
- * @module   Bannerslider
- * @author   Magestore Developer
- */
 class Collection extends AbstractCollection
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _construct()
     {

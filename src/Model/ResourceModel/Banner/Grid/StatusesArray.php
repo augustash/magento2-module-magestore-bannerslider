@@ -28,8 +28,8 @@ namespace Magestore\Bannerslider\Model\ResourceModel\Banner\Grid;
  */
 class StatusesArray implements \Magento\Framework\Data\OptionSourceInterface
 {
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 2;
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 2;
 
     /**
      * @return array

@@ -41,7 +41,7 @@ use Magento\Framework\Data\FormFactory;
  */
 class Form extends Generic implements TabInterface
 {
-    const FIELD_NAME_SUFFIX = 'slider';
+    public const FIELD_NAME_SUFFIX = 'slider';
 
     /**
      * @var \Magento\Config\Model\Config\Structure\Element\Dependency\FieldFactory
@@ -540,7 +540,7 @@ class Form extends Generic implements TabInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function canShowTab()
     {
@@ -548,7 +548,7 @@ class Form extends Generic implements TabInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function isHidden()
     {

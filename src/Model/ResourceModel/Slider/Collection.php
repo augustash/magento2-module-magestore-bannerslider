@@ -34,13 +34,6 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 use Psr\Log\LoggerInterface;
 
-/**
- * Slider Collection
- * @category Magestore
- * @package  Magestore_Bannerslider
- * @module   Bannerslider
- * @author   Magestore Developer
- */
 class Collection extends AbstractCollection
 {
     protected $_idFieldName = 'slider_id';

@@ -28,7 +28,7 @@ use Magento\Framework\View\Element\Template;
 class Bannerslider extends Template implements BlockInterface
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _construct()
     {

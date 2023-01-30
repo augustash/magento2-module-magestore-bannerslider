@@ -39,9 +39,9 @@ class Image extends \Magestore\Bannerslider\Ui\Component\Listing\Column\Abstract
     /**
      * Default image width and height.
      */
-    const IMAGE_WIDTH = '70%';
-    const IMAGE_HEIGHT = '60';
-    const IMAGE_STYLE = 'display: block;margin: auto;';
+    public const IMAGE_WIDTH = '70%';
+    public const IMAGE_HEIGHT = '60';
+    public const IMAGE_STYLE = 'display: block;margin: auto;';
 
     /**
      * @var \Magento\Framework\Filesystem
@@ -75,7 +75,12 @@ class Image extends \Magestore\Bannerslider\Ui\Component\Listing\Column\Abstract
     ) {
         $this->_storeManager = $storeManager;
         $this->filesystem = $filesystem;
-        parent::__construct($context, $uiComponentFactory, $components, $data);
+        parent::__construct(
+            $context,
+            $uiComponentFactory,
+            $components,
+            $data
+        );
     }
 
     /**

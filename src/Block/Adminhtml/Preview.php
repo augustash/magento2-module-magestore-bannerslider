@@ -34,16 +34,16 @@ use Magento\Backend\Block\Template\Context;
  */
 class Preview extends \Magento\Backend\Block\Template
 {
-    const STYLESLIDE_PARAM = 'sliderpreview_id';
-    const PREVIEW_NOTE_ID_MIN = 1;
-    const PREVIEW_NOTE_ID_MAX = 8;
+    public const STYLESLIDE_PARAM = 'sliderpreview_id';
+    public const PREVIEW_NOTE_ID_MIN = 1;
+    public const PREVIEW_NOTE_ID_MAX = 8;
 
     /**
      * Preview template for slider.
      */
-    const STYLESLIDE_EVOLUTION_PREVIEW_TEMPLATE = 'Magestore_Bannerslider::slider/preview/evolution.phtml';
-    const STYLESLIDE_SPECIAL_NOTE_PREVIEW_TEMPLATE = 'Magestore_Bannerslider::slider/preview/special/note.phtml';
-    const STYLESLIDE_FLEXSLIDER_PREVIEW_TEMPLATE = 'Magestore_Bannerslider::slider/preview/flexslider.phtml';
+    public const STYLESLIDE_EVOLUTION_PREVIEW_TEMPLATE = 'Magestore_Bannerslider::slider/preview/evolution.phtml';
+    public const STYLESLIDE_SPECIAL_NOTE_PREVIEW_TEMPLATE = 'Magestore_Bannerslider::slider/preview/special/note.phtml';
+    public const STYLESLIDE_FLEXSLIDER_PREVIEW_TEMPLATE = 'Magestore_Bannerslider::slider/preview/flexslider.phtml';
 
     /**
      * Class constructor.
@@ -61,7 +61,7 @@ class Preview extends \Magento\Backend\Block\Template
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _prepareLayout()
     {

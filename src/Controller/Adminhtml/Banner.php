@@ -34,7 +34,7 @@ use Magento\Framework\Controller\Result\Redirect;
  */
 abstract class Banner extends AbstractAction
 {
-    const PARAM_CRUD_ID = 'banner_id';
+    public const PARAM_CRUD_ID = 'banner_id';
 
     /**
      * Check if admin has permissions to visit related pages.

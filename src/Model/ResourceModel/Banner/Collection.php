@@ -38,10 +38,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Banner Collection
- * @category Magestore
- * @package  Magestore_Bannerslider
- * @module   Bannerslider
- * @author   Magestore Developer
  */
 class Collection extends AbstractCollection
 {
@@ -52,35 +48,35 @@ class Collection extends AbstractCollection
      *
      * @var int
      */
-    protected $_storeViewId = null;
+    protected $storeViewId = null;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $_storeManager;
+    protected $storeManager;
 
     /**
      * @var array
      */
-    protected $_addedTable = [];
+    protected $addedTable = [];
 
     /**
      * @var bool
      */
-    protected $_isLoadSliderTitle = FALSE;
+    protected $isLoadSliderTitle = FALSE;
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\Timezone
      */
-    protected $_stdTimezone;
+    protected $stdTimezone;
 
     /**
      * @var \Magestore\Bannerslider\Model\Slider
      */
-    protected $_slider;
+    protected $slider;
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _construct()
     {
@@ -113,39 +109,42 @@ class Collection extends AbstractCollection
         ?AdapterInterface $connection = null,
         ?AbstractDb $resource = null
     ) {
-        $this->_slider = $slider;
-        $this->_storeManager = $storeManager;
-        $this->_stdTimezone = $stdTimezone;
-        if ($storeViewId = $this->_storeManager->getStore()->getId()) {
-            $this->_storeViewId = $storeViewId;
+        $this->slider = $slider;
+        $this->storeManager = $storeManager;
+        $this->stdTimezone = $stdTimezone;
+        if ($storeViewId = $this->storeManager->getStore()->getId()) {
+            $this->storeViewId = $storeViewId;
         }
 
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
     }
 
     /**
-     * @param $isLoadSliderTitle
-     * @return $this
+     * Setter for isLoadSliderTitle.
+     *
+     * @param bool $isLoadSliderTitle
+     * @return \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection
      */
-    public function setIsLoadSliderTitle($isLoadSliderTitle)
+    public function setIsLoadSliderTitle(bool $isLoadSliderTitle)
     {
-        $this->_isLoadSliderTitle = $isLoadSliderTitle;
-
+        $this->isLoadSliderTitle = (bool) $isLoadSliderTitle;
         return $this;
     }
 
     /**
+     * Getter for isLoadSliderTitle
+     *
      * @return bool
      */
-    public function isLoadSliderTitle()
+    public function isLoadSliderTitle(): bool
     {
-        return $this->_isLoadSliderTitle;
+        return (bool) $this->isLoadSliderTitle;
     }
 
     /**
-     * Before load action.
+     * Before load collection.
      *
-     * @return $this
+     * @return \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection
      */
     protected function _beforeLoad()
     {
@@ -158,12 +157,12 @@ class Collection extends AbstractCollection
 
     /**
      * join table to get Slider Title of Banner
-     * @return $this
+     * @return \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection
      */
     public function joinSliderTitle()
     {
         $this->getSelect()->joinLeft(
-            ['sliderTable' => $this->getTable('magestore_bannerslider_slider')],
+            ['sliderTable' => $this->getTable('magestore_bannersliderslider')],
             'main_table.slider_id = sliderTable.slider_id',
             ['title' => 'sliderTable.title', 'slider_status' => 'sliderTable.status']
         );
@@ -172,36 +171,34 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * set order random by banner id
+     * Set order random by banner id.
      *
-     * @return $this
+     * @return \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection
      */
     public function setOrderRandByBannerId()
     {
         $this->getSelect()->orderRand('main_table.banner_id');
-
         return $this;
     }
 
     /**
-     * get store view id.
+     * Get store view id.
      *
-     * @return int [description]
+     * @return int
      */
     public function getStoreViewId()
     {
-        return $this->_storeViewId;
+        return $this->storeViewId;
     }
 
     /**
-     * set store view id.
+     * Set store view id.
      *
-     * @param int $storeViewId [description]
+     * @param int $storeViewId
      */
     public function setStoreViewId($storeViewId)
     {
-        $this->_storeViewId = $storeViewId;
-
+        $this->storeViewId = $storeViewId;
         return $this;
     }
 
@@ -224,7 +221,7 @@ class Collection extends AbstractCollection
         $storeViewId = $this->getStoreViewId();
 
         if (in_array($field, $attributes) && $storeViewId) {
-            if (!in_array($field, $this->_addedTable)) {
+            if (!in_array($field, $this->addedTable)) {
                 $sql = sprintf(
                     'main_table.banner_id = %s.banner_id AND %s.store_id = %s  AND %s.attribute_code = %s ',
                     $this->getConnection()->quoteTableAs($field),
@@ -236,15 +233,12 @@ class Collection extends AbstractCollection
 
                 $this->getSelect()
                     ->joinLeft(array($field => $this->getTable('magestore_bannerslider_value')), $sql, array());
-                $this->_addedTable[] = $field;
+                $this->addedTable[] = $field;
             }
 
             $fieldNullCondition = $this->_translateCondition("$field.value", ['null' => TRUE]);
-
             $mainfieldCondition = $this->_translateCondition("main_table.$field", $condition);
-
             $fieldCondition = $this->_translateCondition("$field.value", $condition);
-
             $condition = $this->_implodeCondition(
                 $this->_implodeCondition($fieldNullCondition, $mainfieldCondition, 'AND'),
                 $fieldCondition,
@@ -263,9 +257,11 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param $firstCondition
-     * @param $secondCondition
-     * @param $type
+     * Implode condition.
+     *
+     * @param mixed $firstCondition
+     * @param mixed $secondCondition
+     * @param string $type
      * @return string
      */
     protected function _implodeCondition($firstCondition, $secondCondition, $type)
@@ -274,7 +270,9 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * get read connnection.
+     * Get database connnection.
+     * 
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface|false
      */
     public function getConnection()
     {
@@ -282,7 +280,9 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * Multi store view.
+     * After collection load.
+     * 
+     * @return \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection
      */
     protected function _afterLoad()
     {
@@ -296,11 +296,16 @@ class Collection extends AbstractCollection
         return $this;
     }
 
-
+    /**
+     * Get banner collection.
+     *
+     * @param int $sliderId
+     * @return \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection
+     */
     public function getBannerCollection($sliderId)
     {
-        $storeViewId = $this->_storeManager->getStore()->getId();
-        $dateTimeNow = $this->_stdTimezone->date()->format('Y-m-d H:i:s');
+        $storeViewId = $this->storeManager->getStore()->getId();
+        $dateTimeNow = $this->stdTimezone->date()->format('Y-m-d H:i:s');
 
         /** @var \Magestore\Bannerslider\Model\ResourceModel\Banner\Collection $bannerCollection */
         $bannerCollection = $this->setStoreViewId($storeViewId)
@@ -310,7 +315,7 @@ class Collection extends AbstractCollection
             ->addFieldToFilter('end_time', ['gteq' => $dateTimeNow])
             ->setOrder('order_banner', 'ASC');
 
-        if ($this->_slider->getSortType() == Slider::SORT_TYPE_RANDOM) {
+        if ($this->slider->getSortType() == Slider::SORT_TYPE_RANDOM) {
             $bannerCollection->setOrderRandByBannerId();
         }
 

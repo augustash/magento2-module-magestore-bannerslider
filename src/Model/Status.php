@@ -31,8 +31,8 @@ namespace Magestore\Bannerslider\Model;
  */
 class Status
 {
-    const STATUS_ENABLED = 1;
-    const STATUS_DISABLED = 2;
+    public const STATUS_ENABLED = 1;
+    public const STATUS_DISABLED = 2;
 
     /**
      * get available statuses.

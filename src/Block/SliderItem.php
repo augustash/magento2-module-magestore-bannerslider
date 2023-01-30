@@ -48,27 +48,27 @@ class SliderItem extends Template
     /**
      * Template for evolution slider.
      */
-    const STYLESLIDE_EVOLUTION_TEMPLATE = 'Magestore_Bannerslider::slider/evolution.phtml';
+    public const STYLESLIDE_EVOLUTION_TEMPLATE = 'Magestore_Bannerslider::slider/evolution.phtml';
 
     /**
      * Template for popup.
      */
-    const STYLESLIDE_POPUP_TEMPLATE = 'Magestore_Bannerslider::slider/popup.phtml';
+    public const STYLESLIDE_POPUP_TEMPLATE = 'Magestore_Bannerslider::slider/popup.phtml';
 
     /**
      * Template for note slider.
      */
-    const STYLESLIDE_SPECIAL_NOTE_TEMPLATE = 'Magestore_Bannerslider::slider/special/note.phtml';
+    public const STYLESLIDE_SPECIAL_NOTE_TEMPLATE = 'Magestore_Bannerslider::slider/special/note.phtml';
 
     /**
      * Template for flex slider.
      */
-    const STYLESLIDE_FLEXSLIDER_TEMPLATE = 'Magestore_Bannerslider::slider/flexslider.phtml';
+    public const STYLESLIDE_FLEXSLIDER_TEMPLATE = 'Magestore_Bannerslider::slider/flexslider.phtml';
 
     /**
      * Template for custom slider.
      */
-    const STYLESLIDE_CUSTOM_TEMPLATE = 'Magestore_Bannerslider::slider/custom.phtml';
+    public const STYLESLIDE_CUSTOM_TEMPLATE = 'Magestore_Bannerslider::slider/custom.phtml';
 
     /**
      * @var \Magento\Framework\Stdlib\DateTime\DateTime
@@ -154,7 +154,7 @@ class SliderItem extends Template
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _toHtml()
     {
@@ -211,7 +211,7 @@ class SliderItem extends Template
     public function setStyleSlideTemplate($styleSlideId)
     {
         switch ($styleSlideId) {
-                //Evolution slide
+            // Evolution slide
             case SliderModel::STYLESLIDE_EVOLUTION_ONE:
             case SliderModel::STYLESLIDE_EVOLUTION_TWO:
             case SliderModel::STYLESLIDE_EVOLUTION_THREE:
@@ -222,12 +222,13 @@ class SliderItem extends Template
             case SliderModel::STYLESLIDE_POPUP:
                 $this->setTemplate(self::STYLESLIDE_POPUP_TEMPLATE);
                 break;
-                //Note all page
+            
+            // Note all page
             case SliderModel::STYLESLIDE_SPECIAL_NOTE:
                 $this->setTemplate(self::STYLESLIDE_SPECIAL_NOTE_TEMPLATE);
                 break;
 
-                // Flex slide
+            // Flex slide
             default:
                 $this->setTemplate(self::STYLESLIDE_FLEXSLIDER_TEMPLATE);
                 break;

@@ -49,7 +49,7 @@ use Magento\Framework\View\Result\LayoutFactory;
  */
 abstract class AbstractAction extends ParentBackendAction
 {
-    const PARAM_CRUD_ID = 'entity_id';
+    public const PARAM_CRUD_ID = 'entity_id';
 
     /**
      * @var \Magento\Backend\Helper\Js

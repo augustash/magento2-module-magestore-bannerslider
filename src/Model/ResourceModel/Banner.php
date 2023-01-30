@@ -32,7 +32,7 @@ namespace Magestore\Bannerslider\Model\ResourceModel;
 class Banner extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     protected function _construct()
     {
